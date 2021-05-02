@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Inventario</title>
+</head>
+<body>
+    <div class="container" id="app">
+ 
+       <h1>Mantenedor de productos</h1>
+          <hr/>
+    
+        <fieldset>
+          <h3>Añadir un Producto</h3>
+          <form>
+            <label>Nombre: </label>
+             <input type="text" v-model="nuevoNombre">
+            <br>
+            <label>Descripción: </label >
+             <input type="text" v-model="nuevaDescripcion">
+            <br>
+            <label>Precio: </label >
+             <input type="text" v-model="nuevoPrecio">
+             
+        </fieldset>
+            <br>
+            <input type="button" value="Añadir Producto" @click="agregarProducto">
+           
+           </form>
+    
+         <hr>
+        <h2>Lista de Productos</h2>
+
+        <table class="tabla">
+            <tr>
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Precio</th>
+             <th></th>
+             <th></th>
+            </tr>
+               <tr  v-for="(item,index) of productos">
+                 <td>
+                  <span v-if="formActualizar && indexActualizar == index">
+                    <input type="text" v-model="nuevoNombre">
+                </span>
+                <span v-else>
+                    {{ item.nombre }}
+                </span>
+                 </td>
+
+                 <td>
+                  <span v-if="formActualizar && indexActualizar == index">
+                    <input type="text"  v-model="nuevaDescripcion">
+                </span>
+                <span v-else>
+                    {{ item.descripcion }}
+                 </td>
+                 <td>
+
+                   <span v-if="formActualizar && indexActualizar == index">
+                  <input type="text"  v-model="nuevoPrecio">
+              </span>
+              <span v-else>
+                  
+                  {{ item.precio }}
+                </td>
+                
+                 <td >
+                  <span v-if="formActualizar && indexActualizar == index">
+                    <button class="tableBtn" @click="guardarCambios(index)" >guardar</button>
+                </span>
+                <span v-else>
+                   <button class="tableBtn" @click="editarProducto(index)">editar</button></td>
+                 <td><button class="tableBtn" @click="eliminarProducto(index)">eliminar</button></td>          
+               </tr>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
